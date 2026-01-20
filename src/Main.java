@@ -1,15 +1,24 @@
+import edu.aitu.oop3.db.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) {
-        Book book1 = new Book("All Quiet on the Western Front", "Erich Maria Remarque", 1929);
-        Book book2 = new Book("Harry Potter", "J.K. Rowling", 1997);
-
-        System.out.println(book1);
-        System.out.println(book2);
-
-        book1.markAsBorrowed();
-        System.out.println(book1);
-
-        book1.markAsReturned();
-        System.out.println(book1);
+        System.out.println("Connecting to Supabase...");
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected successfully!");
+            String sql = "SELECT CURRENT_TIMESTAMP";
+            try (PreparedStatement stmt = connection.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Database time: " + rs.getTimestamp(1));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while connecting to database:");
+            e.printStackTrace();
+        }
     }
 }
