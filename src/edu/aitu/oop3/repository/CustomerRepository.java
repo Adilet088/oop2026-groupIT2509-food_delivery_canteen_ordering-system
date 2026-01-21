@@ -1,4 +1,7 @@
 package edu.aitu.oop3.repository;
 
-public class CustomerRepository {
+import edu.aitu.oop3.entity.Customer;
+
+public interface CustomerRepository {
+    Customer findById(int id);
 }
