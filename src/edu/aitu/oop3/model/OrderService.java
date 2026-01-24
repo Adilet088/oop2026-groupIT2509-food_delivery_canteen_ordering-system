@@ -18,7 +18,8 @@ public class OrderService {
 
     public Order placeOrder(int customerId, int menuItemId, int quantity) {
         if (quantity <= 0) {
-            throw new InvalidQuantityException("Quantity must be > 0");
+            throw new InvalidQuantityException(quantity);
+
         }
 
         customerRepo.findById(customerId);
