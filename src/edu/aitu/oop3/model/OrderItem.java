@@ -1,35 +1,27 @@
 package edu.aitu.oop3.model;
 
-import java.util.Objects;
-
 public class OrderItem {
+    protected int id;
+    protected int orderId;
+    protected int menuItemId;
+    protected int quantity;
+    protected double priceAtOrder;
 
-    private final MenuItem menuItem;
-    private final int quantity;
+    public OrderItem() { }
 
-    public OrderItem(MenuItem menuItem, int quantity) {
-        this.menuItem = Objects.requireNonNull(menuItem, "MenuItem cannot be null");
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than zero");
-        }
-        if (!menuItem.isAvailable()) {
-            throw new IllegalStateException("Menu item is not available");
-        }
-        this.quantity = quantity;
-    }
+    public int getId() { return id; }
+    public int getOrderId() { return orderId; }
+    public int getMenuItemId() { return menuItemId; }
+    public int getQuantity() { return quantity; }
+    public double getPriceAtOrder() { return priceAtOrder; }
 
-    protected double getTotalPrice() {
-        return menuItem.getPrice() * quantity;
-    }
-
-    protected MenuItem getMenuItem() {
-        return menuItem;
-    }
-
-    protected int getQuantity() {
-        return quantity;
-    }
+    public void setId(int id) { this.id = id; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
+    public void setMenuItemId(int menuItemId) { this.menuItemId = menuItemId; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setPriceAtOrder(double priceAtOrder) { this.priceAtOrder = priceAtOrder; }
 }
+
 
 
 

@@ -1,44 +1,24 @@
 package edu.aitu.oop3.model;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class Order {
-    private int id;
-    private Customer customer;
-    private List<OrderItem> items;
-    private boolean completed;
+    protected int id;
+    protected int customerId;
+    protected String status; // ACTIVE / COMPLETED
+    protected LocalDateTime orderDate;
 
-    public Order(int id, Customer customer, List<OrderItem> items) {
-        this.id = id;
-        this.customer = customer;
-        this.items = items;
-        this.completed = false;
-    }
+    public Order() { }
 
-    protected int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public int getCustomerId() { return customerId; }
+    public String getStatus() { return status; }
+    public LocalDateTime getOrderDate() { return orderDate; }
 
-    protected Customer getCustomer() {
-        return customer;
-    }
-
-    protected List<OrderItem> getItems() {
-        return items;
-    }
-
-    protected boolean isCompleted() {
-        return completed;
-    }
-
-    protected void markCompleted() {
-        this.completed = true;
-    }
-
-    protected double getTotalPrice() {
-        return items.stream()
-                .mapToDouble(OrderItem::getTotalPrice)
-                .sum();
-    }
+    public void setId(int id) { this.id = id; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
+    public void setStatus(String status) { this.status = status; }
+    public void setOrderDate(LocalDateTime orderDate) { this.orderDate = orderDate; }
 }
+
 
