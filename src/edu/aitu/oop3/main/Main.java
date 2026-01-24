@@ -1,7 +1,7 @@
 package edu.aitu.oop3.main;
 
 import edu.aitu.oop3.model.*;
-import edu.aitu.oop3.exception.OrderNotFoundException;
+import edu.aitu.oop3.exception.InvalidQuantityException;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,10 +29,12 @@ public class Main {
 
         System.out.println("\n=== EXCEPTION TEST ===");
 
+        System.out.println("\n=== EXCEPTION TEST ===");
+
         try {
-            orderService.completeOrder(9999); // does not exist
-        } catch (OrderNotFoundException e) {
-            System.out.println(e.getMessage());
+            orderService.placeOrder(1, 1, -5); // invalid quantity
+        } catch (InvalidQuantityException e) {
+            System.out.println("TEST PASSED: " + e.getMessage());
         }
     }
 }
