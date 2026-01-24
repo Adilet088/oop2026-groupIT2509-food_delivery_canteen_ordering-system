@@ -41,7 +41,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public void addItem(int orderId, int menuItemId, int quantity, double priceAtOrder) {
-        // important: price_at_order matches your SQL column name
         String sql = "INSERT INTO order_items(order_id, menu_item_id, quantity, price_at_order) VALUES (?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnection.getConnection();
