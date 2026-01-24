@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Order {
     protected int id;
     protected int customerId;
-    protected String status; // ACTIVE / COMPLETED
+    protected String status;
     protected LocalDateTime orderDate;
 
     public Order() { }
