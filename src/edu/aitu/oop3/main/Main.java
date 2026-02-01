@@ -2,6 +2,9 @@ package edu.aitu.oop3.main;
 
 import edu.aitu.oop3.model.*;
 import edu.aitu.oop3.exception.InvalidQuantityException;
+import edu.aitu.oop3.exception.CustomerNotFoundException;
+import edu.aitu.oop3.exception.MenuItemNotAvailableException;
+import edu.aitu.oop3.exception.OrderNotFoundException;
 import edu.aitu.oop3.pattern.builder.PlaceOrderRequest;
 import edu.aitu.oop3.pattern.singleton.TaxConfig;
 
@@ -40,7 +43,8 @@ public class Main {
         orderService.completeOrder(order.getId());
         System.out.println("Order completed!");
 
-        System.out.println("\n=== EXCEPTION TEST ===");
+        System.out.println("\n=== EXCEPTION TESTS ===");
+
         try {
             PlaceOrderRequest bad = PlaceOrderRequest.builder()
                     .customerId(1)
@@ -48,8 +52,48 @@ public class Main {
                     .quantity(-5)
                     .build();
             orderService.placeOrder(bad);
-        } catch (IllegalArgumentException | InvalidQuantityException e) {
-            System.out.println("TEST PASSED: " + e.getMessage());
+        } catch (InvalidQuantityException |
+                 CustomerNotFoundException |
+                 MenuItemNotAvailableException |
+                 OrderNotFoundException e) {
+            System.out.println("TEST 1 PASSED: " + e.getMessage());
+        }
+
+        try {
+            PlaceOrderRequest bad = PlaceOrderRequest.builder()
+                    .customerId(9999)
+                    .menuItemId(1)
+                    .quantity(1)
+                    .build();
+            orderService.placeOrder(bad);
+        } catch (InvalidQuantityException |
+                 CustomerNotFoundException |
+                 MenuItemNotAvailableException |
+                 OrderNotFoundException e) {
+            System.out.println("TEST 2 PASSED: " + e.getMessage());
+        }
+
+        try {
+            PlaceOrderRequest bad = PlaceOrderRequest.builder()
+                    .customerId(1)
+                    .menuItemId(9999)
+                    .quantity(1)
+                    .build();
+            orderService.placeOrder(bad);
+        } catch (InvalidQuantityException |
+                 CustomerNotFoundException |
+                 MenuItemNotAvailableException |
+                 OrderNotFoundException e) {
+            System.out.println("TEST 3 PASSED: " + e.getMessage());
+        }
+
+        try {
+            orderService.completeOrder(9999);
+        } catch (InvalidQuantityException |
+                 CustomerNotFoundException |
+                 MenuItemNotAvailableException |
+                 OrderNotFoundException e) {
+            System.out.println("TEST 4 PASSED: " + e.getMessage());
         }
     }
 }
