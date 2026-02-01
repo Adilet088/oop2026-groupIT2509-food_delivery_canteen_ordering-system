@@ -1,4 +1,8 @@
 package edu.aitu.oop3.common;
 
-public class Repository {
+import java.util.List;
+
+public interface Repository<T, ID> {
+    T findById(ID id);
+    List<T> findAll();
 }
